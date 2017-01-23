@@ -7,10 +7,16 @@ option_install_xl_cli: true
 
 option_install_java: true
 
+option_init_xl_server: true
+
 java_version: 8
 
 xl_server_install_dir: /opt/xebialabs
 xl_cli_install_dir: /home/{{ansible_user_id}}
+
+xl_admin_password: "admin1234"
+
+xl_simple_init_sequence: "\n{{xl_admin_password}}\n{{xl_admin_password}}\n\n\n\n\n\n"
 
 xl_user: "{{ansible_user_id}}"
 xl_group: "{{ansible_user_id}}"

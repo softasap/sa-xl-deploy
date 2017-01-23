@@ -46,6 +46,13 @@
     tags:
       xl-deploy
 
+  - name: XL Deploy | Deploy license file, if any
+    copy: src="{{xl_license_file}}" dest="{{xl_server_install_dir}}/xl-deploy-server/conf/deployit-license.lic" owner="{{xl_user}}" group="{{xl_user}}"
+    become: yes
+    become_user: "{{xl_user}}"
+    tags:
+      xl-deploy
+
 
   - name: XL Deploy | cli server dir exists
     file: path="{{xl_cli_install_dir}}" state="directory"
@@ -67,4 +74,10 @@
     tags:
       xl-deploy
 
-
+  - name: XL Deploy | init server
+    shell: echo "{{xl_simple_init_sequence}}" | ./run.sh -setup
+    args:
+      chdir: "{{xl_server_install_dir}}/xl-deploy-server/bin"
+    when: option_init_xl_server
+    tags:
+      xl-deploy
