@@ -3,5 +3,6 @@
   roles:
     - {
         role: "role_under_test",
-        docker_test: true
+        docker_test: true,
+        option_init_xl_server: false
       }
