@@ -1,5 +1,5 @@
-sa-secure-auditd
-================
+sa-xl-deploy
+============
 [![Build Status](https://travis-ci.org/softasap/sa-xl-deploy.svg?branch=master)](https://travis-ci.org/softasap/sa-xl-deploy)
 
 XL Deploy is the only application release automation solution that is agentless across all target platforms.

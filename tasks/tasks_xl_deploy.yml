@@ -79,6 +79,7 @@
       args:
         chdir: "{{xl_server_install_dir}}/xl-deploy-server/bin"
       become: yes
+      when: docker_test is not defined
       tags:
         xl-deploy
 
