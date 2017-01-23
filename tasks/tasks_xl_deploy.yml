@@ -71,6 +71,8 @@
       shell: expect -f {{xl_setup_mode}}_init.expect
       args:
         chdir: "{{xl_server_install_dir}}/xl-deploy-server/bin"
+      register: initial_config_result
+      failed_when: "'Finished setup.' not in initial_config_result.stdout"
       tags:
         xl-deploy
 
@@ -79,12 +81,17 @@
       args:
         chdir: "{{xl_server_install_dir}}/xl-deploy-server/bin"
       become: yes
+      register: register_service_result
+      failed_when: "'Service xl-deploy installed' not in register_service_result.stdout"
       when: docker_test is not defined
       tags:
         xl-deploy
 
     - name: XL Deploy | Drop automatic configuration scripts
       file: path="{{xl_server_install_dir}}/xl-deploy-server/bin/{{item}}" state="absent"
+      with_items:
+        - "{{xl_setup_mode}}_init.expect"
+        - "{{xl_setup_mode}}_service.expect"
       become: yes
       tags:
         xl-deploy
