@@ -1,0 +1,41 @@
+#!/usr/bin/expect -f
+#
+
+set force_conservative 0  ;# set to 1 to force conservative mode even if
+                          ;# script wasn't run conservatively originally
+if {$force_conservative} {
+        set send_slow {1 .1}
+        proc send {ignore arg} {
+                sleep .1
+                exp_send -s -- $arg
+        }
+}
+
+#
+
+
+set timeout -1
+spawn ./run.sh -setup
+match_max 100000
+expect  "Welcome to the XL Deploy Server setup.\r"
+send -- "\r"
+expect "Do you want to use the simple setup?\r"
+send -- "\r"
+expect "New password"
+send -- "{{xl_admin_password}}\r"
+expect "Re-type password"
+send -- "{{xl_admin_password}}\r"
+expect -exact "Do you want to initialize the JCR repository?\r
+Options are yes or no.\r"
+send -- "yes\r"
+expect -exact "yes\r
+XL Deploy Server will initialize the JCR repository.\r
+\r
+The password encryption key protects the passwords stored in the repository. \r
+Do you want to generate a new password encryption key?\r
+Options are yes or no.\r
+\[yes\]: "
+send -- "no\r"
+expect "Do you agree with the following settings for XL Deploy Server and would you like to save them?\r"
+send -- "yes\r"
+expect eof

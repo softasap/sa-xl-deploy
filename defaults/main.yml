@@ -1,6 +1,10 @@
 ---
 # defaults file for sa-xl-deploy
 
+root_dir: "{{playbook_dir}}"
+
+role_dir: "{{role_path}}"
+
 option_install_xl_server: true
 
 option_install_xl_cli: true
@@ -16,10 +20,10 @@ xl_cli_install_dir: /home/{{ansible_user_id}}
 
 xl_admin_password: "admin1234"
 
-xl_simple_init_sequence: "\n{{xl_admin_password}}\n{{xl_admin_password}}\n\n\n\n\n\n"
-
 xl_user: "{{ansible_user_id}}"
 xl_group: "{{ansible_user_id}}"
+
+xl_setup_mode: simple
 
 xl_server_zip_pack: https://dist.xebialabs.com/xl-deploy-trial-server.zip
 xl_cli_zip_pack: https://dist.xebialabs.com/xl-deploy-trial-cli.zip
