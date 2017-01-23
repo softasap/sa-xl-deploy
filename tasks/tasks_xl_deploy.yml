@@ -2,6 +2,9 @@
 
   - name: XL Deploy | Install dependencies
     apt: pkg="{{item}}" state="installed"
+    with_items:
+       - acl
+       - unzip
     become: yes
     tags:
       xl-deploy
@@ -36,6 +39,14 @@
     tags:
       xl-deploy
 
+  - name: XL Deploy | rename server folder to generic name
+    shell: mv xl-deploy-*-server xl-deploy-server
+    args:
+      chdir: "{{xl_server_install_dir}}"
+    tags:
+      xl-deploy
+
+
   - name: XL Deploy | cli server dir exists
     file: path="{{xl_cli_install_dir}}" state="directory"
     tags:
@@ -48,3 +59,12 @@
       remote_src: True
     tags:
       xl-deploy
+
+  - name: XL Deploy | rename cli folder to generic name
+    shell: mv xl-deploy-*-cli xl-deploy-cli
+    args:
+      chdir: "{{xl_cli_install_dir}}"
+    tags:
+      xl-deploy
+
+

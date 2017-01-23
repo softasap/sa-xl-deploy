@@ -5,11 +5,17 @@ option_install_xl_server: true
 
 option_install_xl_cli: true
 
-xl_server_install_dir: /opt/xebialabs/xl_deploy
-xl_cli_install_dir: /home/{{ansible_user_id}}/xl_cli
+option_install_java: true
+
+java_version: 8
+
+xl_server_install_dir: /opt/xebialabs
+xl_cli_install_dir: /home/{{ansible_user_id}}
 
 xl_user: "{{ansible_user_id}}"
 xl_group: "{{ansible_user_id}}"
 
 xl_server_zip_pack: https://dist.xebialabs.com/xl-deploy-trial-server.zip
 xl_cli_zip_pack: https://dist.xebialabs.com/xl-deploy-trial-cli.zip
+
+xl_license_file: "{{playbook_dir}}/deployit-license.lic"
