@@ -1,0 +1,50 @@
+---
+
+  - name: XL Deploy | Install dependencies
+    apt: pkg="{{item}}" state="installed"
+    become: yes
+    tags:
+      xl-deploy
+
+  - name: XL Deploy | Ensure server dir exists
+    file: path="{{xl_server_install_dir}}" state="directory" owner="{{xl_user}}" group="{{xl_user}}"
+    become: yes
+    tags:
+      xl-deploy
+
+  - name: XL Deploy | download server package
+    get_url:
+      url="{{xl_server_zip_pack}}"
+      dest="/tmp/xl_server_pack.zip"
+    tags:
+      xl-deploy
+
+  - name: XL Deploy | download cli package
+    get_url:
+      url="{{xl_cli_zip_pack}}"
+      dest="/tmp/xl_cli_pack.zip"
+    tags:
+      xl-deploy
+
+  - name: XL Deploy | unpack server package
+    unarchive:
+      src: /tmp/xl_server_pack.zip
+      dest: "{{xl_server_install_dir}}"
+      remote_src: True
+    become: yes
+    become_user: "{{xl_user}}"
+    tags:
+      xl-deploy
+
+  - name: XL Deploy | cli server dir exists
+    file: path="{{xl_cli_install_dir}}" state="directory"
+    tags:
+      xl-deploy
+
+  - name: XL Deploy | unpack cli package
+    unarchive:
+      src: /tmp/xl_cli_pack.zip
+      dest: "{{xl_cli_install_dir}}"
+      remote_src: True
+    tags:
+      xl-deploy

@@ -1,0 +1,3 @@
+---
+# tasks file for sa-xl-deploy
+  - include: tasks_xl_deploy.yml 

@@ -1,0 +1,4 @@
+[submodule "roles/sa-xl-deploy"]
+        path = roles/sa-xl-deploy
+        url = https://github.com/softasap/sa-xl-deploy.git
+
