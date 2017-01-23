@@ -10,7 +10,8 @@
 
   roles:
      - {
-         role: "sa-xl-deploy"
+         role: "sa-xl-deploy",
+         option_init_xl_server: false
        }
 
 

@@ -1,3 +1,5 @@
 box-example/roles
 *.retry
+*.lic
+*.swp
 tempfile
