@@ -28,13 +28,7 @@ send -- "{{xl_admin_password}}\r"
 expect -exact "Do you want to initialize the JCR repository?\r
 Options are yes or no.\r"
 send -- "yes\r"
-expect -exact "yes\r
-XL Deploy Server will initialize the JCR repository.\r
-\r
-The password encryption key protects the passwords stored in the repository. \r
-Do you want to generate a new password encryption key?\r
-Options are yes or no.\r
-\[yes\]: "
+expect -exact "Do you want to generate a new password encryption key?\r"
 send -- "no\r"
 expect "Do you agree with the following settings for XL Deploy Server and would you like to save them?\r"
 send -- "yes\r"
